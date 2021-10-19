@@ -20,6 +20,9 @@ public class DefaultFrame extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         logoutButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)); // loginButton is variable
+        
+        // set Title
+        this.setTitle("Welcome!");
     }
 
     /**

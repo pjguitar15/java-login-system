@@ -67,7 +67,8 @@ public class CreateAccount extends javax.swing.JFrame {
         // disable maximize
         this.setResizable(false);
         
-             
+        // set Title
+        this.setTitle("Create an account");
     }
 
     /**

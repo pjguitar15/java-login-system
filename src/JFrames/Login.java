@@ -58,6 +58,9 @@ public class Login extends javax.swing.JFrame {
         
         // disable maximize
         this.setResizable(false);
+        
+        // set Title
+        this.setTitle("Login");
     }
 
     /**
@@ -242,20 +245,25 @@ public class Login extends javax.swing.JFrame {
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         // TODO add your handling code here:
         String uName = userField.getText();
-        String pw = passwordField.getText();
+        String pw = passwordField.getText();  
         boolean hasAccess = false;        
         try {
             Connection conn = ConnectionProvider.getConn();
             Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT username, password FROM users where username = '"+uName+"' AND password = '"+pw+"'");
-            System.out.println("ResultSet: " + rs.next());
-            if (rs.next()) {
+            ResultSet rs = st.executeQuery("SELECT username, password FROM users");    
+            while (rs.next()) {
+                if (rs.getString(1).equals(uName) && rs.getString(2).equals(pw)) {
+                    hasAccess = true;
+                }           
+            }
+            
+            if (hasAccess == true) {
                 JOptionPane.showMessageDialog(null, "Access permitted!", "Login Success", JOptionPane.INFORMATION_MESSAGE);                
                 this.setVisible(false);
                 new DefaultFrame().setVisible(true);
             }else{
-                JOptionPane.showMessageDialog(null, "Invalid Credentials!", "Login Failed", JOptionPane.ERROR_MESSAGE);                
-            }
+                JOptionPane.showMessageDialog(null, "Invalid Credentials!", "Login Failed", JOptionPane.ERROR_MESSAGE);             
+            }    
             
         } catch (Exception e) {
             System.out.println(e);
@@ -270,26 +278,60 @@ public class Login extends javax.swing.JFrame {
     private void userFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_userFieldKeyPressed
         // TODO add your handling code here:
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {  
-            if (userField.getText().equals("admin") && passwordField.getText().equals("admin")) {
+            String uName = userField.getText();
+        String pw = passwordField.getText();  
+        boolean hasAccess = false;        
+        try {
+            Connection conn = ConnectionProvider.getConn();
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery("SELECT username, password FROM users");    
+            while (rs.next()) {
+                if (rs.getString(1).equals(uName) && rs.getString(2).equals(pw)) {
+                    hasAccess = true;
+                }           
+            }
+            
+            if (hasAccess == true) {
                 JOptionPane.showMessageDialog(null, "Access permitted!", "Login Success", JOptionPane.INFORMATION_MESSAGE);                
                 this.setVisible(false);
                 new DefaultFrame().setVisible(true);
             }else{
-                JOptionPane.showMessageDialog(null, "Invalid Credentials!", "Login Failed", JOptionPane.ERROR_MESSAGE);                
-            }           
+                JOptionPane.showMessageDialog(null, "Invalid Credentials!", "Login Failed", JOptionPane.ERROR_MESSAGE);             
+            }    
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        }   
         }
     }//GEN-LAST:event_userFieldKeyPressed
 
     private void passwordFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordFieldKeyPressed
         // TODO add your handling code here:
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if (userField.getText().equals("admin") && passwordField.getText().equals("admin")) {
+            String uName = userField.getText();
+        String pw = passwordField.getText();  
+        boolean hasAccess = false;        
+        try {
+            Connection conn = ConnectionProvider.getConn();
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery("SELECT username, password FROM users");    
+            while (rs.next()) {
+                if (rs.getString(1).equals(uName) && rs.getString(2).equals(pw)) {
+                    hasAccess = true;
+                }           
+            }
+            
+            if (hasAccess == true) {
                 JOptionPane.showMessageDialog(null, "Access permitted!", "Login Success", JOptionPane.INFORMATION_MESSAGE);                
                 this.setVisible(false);
                 new DefaultFrame().setVisible(true);
             }else{
-                JOptionPane.showMessageDialog(null, "Invalid Credentials!", "Login Failed", JOptionPane.ERROR_MESSAGE);                
-            } 
+                JOptionPane.showMessageDialog(null, "Invalid Credentials!", "Login Failed", JOptionPane.ERROR_MESSAGE);             
+            }    
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        }
         }
     }//GEN-LAST:event_passwordFieldKeyPressed
 
